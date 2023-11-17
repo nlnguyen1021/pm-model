@@ -92,7 +92,7 @@ for i in range(len(event_code)):
     Event_dictionary[python_event_code[i]] = event_code[i]
 #{3407872.0: '0', 3407873.0: '1', 3407874.0: '2', 3407876.0: '3', 3407877.0: '4', 3407878.0: '5', 3407879.0: '6', 3407880.0: '7', 3407881.0: '8', 3407882.0: '9', 3407883.0: '10', 3407884.0: '11', 3407885.0: '12', 3407886.0: '13', 3407887.0: '14', 3407888.0: '15', 3407889.0: '16', 3407890.0: '17', 3407891.0: '18', 3407893.0: '19', 3407894.0: '20', 3407895.0: '21', 3407896.0: '22', 3407897.0: '23', 3407898.0: '24', 3407902.0: '25', 3407972.0: '26', 3473408.0: '30'}
 #print(Event_dictionary)
-rec = data[data.Status != 3407872]
-rec.Status = rec.Status.apply(lambda x: Event_dictionary[x])
+#rec = data[data.Status != 3407872]
+data.Status = data.Status.apply(lambda x: Event_dictionary[x])
 
-rec.to_csv('eeg_recording_chopped', index=False)
+data.to_csv('eeg_recording_chopped', index=False)
