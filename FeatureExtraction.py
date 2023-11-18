@@ -42,7 +42,7 @@ def kurt(window):
     for i in window.columns:
         win_col = window[:][i]
         result.append(win_col.kurt())
-    return window.skew()
+    return result
 
 def min(window):
     min= []
@@ -58,14 +58,14 @@ def max(window):
         max.append(win_col.max())
     return max 
 
-def derivative(window): 
-    sub_window_size = len(window) // 2
-    result = []
-    for i in window.columns:    
-        win_1_mean = window[0:sub_window_size][i].mean()
-        win_2_mean = window[sub_window_size:][i].mean()
-        result.append((win_1_mean-win_2_mean)/2)
-    return result
+# def derivative(window): 
+#     sub_window_size = len(window) // 2
+#     result = []
+#     for i in window.columns:    
+#         win_1_mean = window[0:sub_window_size][i].mean()
+#         win_2_mean = window[sub_window_size:][i].mean()
+#         result.append((win_1_mean-win_2_mean)/2)
+#     return result
 
 feat_mean = sliding_window(data,window_size,step_size,mean)
 feat_std = sliding_window(data,window_size,step_size,std)
@@ -73,9 +73,9 @@ feat_skew = sliding_window(data,window_size,step_size,skew)
 feat_kurt = sliding_window(data,window_size,step_size,kurt)
 feat_min = sliding_window(data,window_size,step_size,min)
 feat_max = sliding_window(data,window_size,step_size,max)
-feat_derivative = sliding_window(data,window_size,step_size,derivative)
+#feat_derivative = sliding_window(data,window_size,step_size,derivative)
 
 
-features = pd.concat([feat_mean,feat_std,feat_skew,feat_kurt,feat_min,feat_max,feat_derivative], axis =1).dropna()
+features = pd.concat([feat_mean,feat_std,feat_skew,feat_kurt,feat_max,feat_min], axis =1).dropna() #,feat_derivative
 
 #features.to_csv('')
